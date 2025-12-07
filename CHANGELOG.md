@@ -5,6 +5,39 @@
 フォーマットは [Keep a Changelog](https://keepachangelog.com/ja/1.0.0/) に基づいており、
 このプロジェクトは [セマンティックバージョニング](https://semver.org/lang/ja/spec/v2.0.0.html) に準拠しています。
 
+## [未リリース]
+
+### 追加
+- **ストリーミングAPI**
+  - `decodeStream(from:)` - プロパティ単位のストリーミングデコード
+  - `decodeElements(of:)` - 配列要素単位のストリーミングデコード（StringProtocol拡張）
+  - `ElementStream<T>` - AsyncSequenceによる要素イテレーション
+
+- **信頼度スコアAPI**
+  - `decodeWithConfidence(from:)` - 抽出精度の信頼度（0.0〜1.0）を取得
+  - `DecodedResult<T>` - value と confidence を含む結果型
+
+- **StringProtocol拡張** - Input-first スタイルのAPI
+  - `"text".decode(as: Type.self)` - 基本デコード
+  - `"text".decodeStream(as: Type.self)` - ストリーミング
+  - `"text".decodeWithConfidence(as: Type.self)` - 信頼度付き
+  - `"text".decodeElements(of: Type.self)` - 配列要素ストリーミング
+
+### 変更
+- **API簡素化**: `@LLMCodable`マクロを廃止
+  - `LLMDecodable`は`Generable`を継承
+  - `LLMEncodable`は`Encodable`を継承
+  - 型定義に`@Generable`を付けるだけで利用可能に
+
+### 削除
+- `@LLMCodable`マクロ（不要になったため）
+- `LLMCodableMacros`モジュール
+
+### 改善
+- Example appをXcodeプロジェクトに再構成
+- Views/Models/Componentsディレクトリ構造に整理
+- 各機能のデモ画面を追加
+
 ## [1.0.0] - 2025-12-07
 
 ### 追加
@@ -43,3 +76,5 @@
 - GitHub Actions による DocC 自動デプロイ
 
 [1.0.0]: https://github.com/no-problem-dev/LLMCodable/releases/tag/v1.0.0
+
+<!-- Auto-generated on 2025-12-06T23:39:32Z by release workflow -->
