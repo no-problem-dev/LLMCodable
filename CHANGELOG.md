@@ -5,6 +5,10 @@
 フォーマットは [Keep a Changelog](https://keepachangelog.com/ja/1.0.0/) に基づいており、
 このプロジェクトは [セマンティックバージョニング](https://semver.org/lang/ja/spec/v2.0.0.html) に準拠しています。
 
+## [未リリース]
+
+なし
+
 ## [1.0.1] - 2025-12-07
 
 ### 追加
@@ -77,3 +81,5 @@
 
 [1.0.1]: https://github.com/no-problem-dev/LLMCodable/releases/tag/v1.0.1
 [1.0.0]: https://github.com/no-problem-dev/LLMCodable/releases/tag/v1.0.0
+
+<!-- Auto-generated on 2025-12-07T05:05:06Z by release workflow -->
