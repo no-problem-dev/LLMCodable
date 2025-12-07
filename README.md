@@ -1,5 +1,8 @@
 # LLMCodable
 
+[![English](https://img.shields.io/badge/lang-English-blue.svg)](README_EN.md)
+[![日本語](https://img.shields.io/badge/lang-日本語-green.svg)](README.md)
+
 Codableのような直感的なプロトコルでLLMベースの構造化データ変換を実現するSwiftパッケージ
 
 ![Swift](https://img.shields.io/badge/Swift-6.2-orange.svg)
@@ -27,7 +30,8 @@ struct Person: LLMCodable {
 }
 
 // LLMを使ってデコード
-let person = try await "谷口恭一は24歳のiOSエンジニアです".decode(as: Person.self)
+let input: String = "谷口恭一は24歳のiOSエンジニアです"
+let person = try await input.decode(as: Person.self)
 // Person(name: "谷口恭一", age: 24, occupation: "iOSエンジニア")
 
 // LLMフレンドリーな形式にエンコード
@@ -79,7 +83,7 @@ struct MeetingNotes: LLMCodable {
 ### 2. テキストからデコード
 
 ```swift
-let text = """
+let text: String = """
 Today's meeting with Alice, Bob, and Charlie covered the Q4 roadmap and budget review.
 Action items: Alice will prepare the presentation, Bob will gather metrics.
 """
@@ -138,7 +142,8 @@ for try await recipe in stream {
 入力の曖昧さに基づく信頼度を取得：
 
 ```swift
-let result = try await "多分30歳くらいの田中さん".decodeWithConfidence(as: Person.self)
+let ambiguousInput: String = "多分30歳くらいの田中さん"
+let result = try await ambiguousInput.decodeWithConfidence(as: Person.self)
 
 print(result.value.name)   // "田中"
 print(result.confidence)   // 0.7（曖昧な入力のため低め）
@@ -150,7 +155,8 @@ print(result.confidence)   // 0.7（曖昧な入力のため低め）
 let session = LanguageModelSession()
 let options = GenerationOptions(temperature: 0.7)
 
-let person = try await "Kyoichi is a 24-year-old developer".decode(
+let input: String = "Kyoichi is a 24-year-old developer"
+let person = try await input.decode(
     as: Person.self,
     using: session,
     options: options
@@ -226,7 +232,7 @@ struct ContactInfo: LLMCodable {
     var address: String?
 }
 
-let text = "連絡先: example@email.com、電話は090-1234-5678、住所は東京都渋谷区"
+let text: String = "連絡先: example@email.com、電話は090-1234-5678、住所は東京都渋谷区"
 let contact = try await text.decode(as: ContactInfo.self)
 ```
 
