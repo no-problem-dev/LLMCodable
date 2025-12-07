@@ -27,7 +27,7 @@ struct Person: LLMCodable {
 }
 
 // LLMを使ってデコード
-let person = try await Person.decode(from: "谷口恭一は24歳のiOSエンジニアです")
+let person = try await "谷口恭一は24歳のiOSエンジニアです".decode(as: Person.self)
 // Person(name: "谷口恭一", age: 24, occupation: "iOSエンジニア")
 
 // LLMフレンドリーな形式にエンコード
@@ -84,7 +84,7 @@ Today's meeting with Alice, Bob, and Charlie covered the Q4 roadmap and budget r
 Action items: Alice will prepare the presentation, Bob will gather metrics.
 """
 
-let notes = try await MeetingNotes.decode(from: text)
+let notes = try await text.decode(as: MeetingNotes.self)
 
 print(notes.topics)      // ["Q4 roadmap", "budget review"]
 print(notes.attendees)   // ["Alice", "Bob", "Charlie"]
@@ -109,7 +109,7 @@ let natural = notes.llmEncoded(using: .naturalLanguage)
 プロパティが生成されるたびにUIを更新：
 
 ```swift
-let stream = try MovieReview.decodeStream(from: reviewText)
+let stream = try reviewText.decodeStream(as: MovieReview.self)
 
 for try await partial in stream {
     if let title = partial.title {
@@ -150,8 +150,8 @@ print(result.confidence)   // 0.7（曖昧な入力のため低め）
 let session = LanguageModelSession()
 let options = GenerationOptions(temperature: 0.7)
 
-let person = try await Person.decode(
-    from: "Kyoichi is a 24-year-old developer",
+let person = try await "Kyoichi is a 24-year-old developer".decode(
+    as: Person.self,
     using: session,
     options: options
 )
@@ -170,14 +170,14 @@ let person = try await Person.decode(
 | `decodeElements(of:)` | 配列要素単位のストリーミング（StringProtocol拡張のみ） |
 | `decodeWithConfidence(from:)` | 信頼度スコア付きデコード |
 
-すべてのメソッドは`StringProtocol`の拡張としても利用可能：
+すべてのメソッドは`StringProtocol`の拡張として利用可能（推奨）：
 
 ```swift
+// Input-first API（推奨）
+let person = try await text.decode(as: Person.self)
+
 // Type-first API
 let person = try await Person.decode(from: text)
-
-// Input-first API
-let person = try await text.decode(as: Person.self)
 ```
 
 ### LLMEncodable
@@ -227,7 +227,7 @@ struct ContactInfo: LLMCodable {
 }
 
 let text = "連絡先: example@email.com、電話は090-1234-5678、住所は東京都渋谷区"
-let contact = try await ContactInfo.decode(from: text)
+let contact = try await text.decode(as: ContactInfo.self)
 ```
 
 ### センチメント分析
