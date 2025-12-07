@@ -7,8 +7,8 @@ import FoundationModels
 /// that language models can easily interpret and process.
 ///
 /// ```swift
-/// @LLMCodable
-/// struct Person {
+/// @Generable
+/// struct Person: LLMCodable {
 ///     var name: String
 ///     var age: Int
 /// }
@@ -17,7 +17,7 @@ import FoundationModels
 /// let text = person.llmEncoded()
 /// // "Person:\n- name: Taro\n- age: 35"
 /// ```
-public protocol LLMEncodable: PromptRepresentable {
+public protocol LLMEncodable: PromptRepresentable, Encodable {
     /// Encodes this instance into an LLM-friendly string.
     /// - Parameter strategy: The encoding strategy to use.
     /// - Returns: An encoded string representation.
@@ -46,7 +46,7 @@ extension LLMEncodable {
     }
 }
 
-extension LLMEncodable where Self: Encodable {
+extension LLMEncodable {
     public func llmEncoded(using strategy: LLMEncodingStrategy) -> String {
         switch strategy {
         case .json:

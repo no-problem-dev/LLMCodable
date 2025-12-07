@@ -11,10 +11,11 @@ Codableのような直感的なプロトコルでLLMベースの構造化デー�
 ## 特徴
 
 ```swift
+import LLMCodable
+
 // 曖昧なテキストから構造化データへ変換
-@LLMCodable
 @Generable
-struct Person {
+struct Person: LLMCodable {
     @Guide(description: "The person's full name")
     var name: String
 
@@ -31,17 +32,16 @@ let person = try await Person.decode(from: "谷口恭一は24歳のiOSエンジ�
 
 // LLMフレンドリーな形式にエンコード
 let markdown = person.llmEncoded(using: .markdown)
-// # Person
-// - **Name**: 谷口恭一
-// - **Age**: 24
-// - **Occupation**: iOSエンジニア
+// Person:
+// - name: 谷口恭一
+// - age: 24
+// - occupation: iOSエンジニア
 ```
 
 - **Codableライクなプロトコル** - `LLMDecodable`と`LLMEncodable`でSwiftらしいAPI設計
 - **Foundation Modelsとの統合** - Apple Intelligence（`@Generable`, `@Guide`）をシームレスに活用
 - **複数エンコード形式** - Markdown、JSON、自然言語、カスタム形式に対応
 - **非同期処理対応** - Swift Concurrencyによるasync/await API
-- **マクロ活用** - `@LLMCodable`マクロで定型コードを削減
 
 ## インストール
 
@@ -61,9 +61,8 @@ dependencies: [
 ```swift
 import LLMCodable
 
-@LLMCodable
 @Generable
-struct MeetingNotes {
+struct MeetingNotes: LLMCodable {
     @Guide(description: "Main topics discussed in the meeting")
     var topics: [String]
 
@@ -130,15 +129,19 @@ public protocol LLMDecodable: Generable {
 }
 ```
 
+`Generable`に準拠していれば、デフォルト実装が自動的に提供されます。
+
 ### LLMEncodable
 
 構造化データをLLMフレンドリーな文字列へ変換するプロトコル。
 
 ```swift
-public protocol LLMEncodable {
-    func llmEncoded<S: StringProtocol>(using strategy: LLMEncodingStrategy) -> S
+public protocol LLMEncodable: PromptRepresentable {
+    func llmEncoded(using strategy: LLMEncodingStrategy) -> String
 }
 ```
+
+`Encodable`に準拠していれば、デフォルト実装が自動的に提供されます。
 
 ### LLMCodable
 
@@ -162,9 +165,8 @@ public typealias LLMCodable = LLMDecodable & LLMEncodable
 ### 情報抽出
 
 ```swift
-@LLMCodable
 @Generable
-struct ContactInfo {
+struct ContactInfo: LLMCodable {
     @Guide(description: "Email address")
     var email: String?
 
@@ -182,9 +184,8 @@ let contact = try await ContactInfo.decode(from: text)
 ### センチメント分析
 
 ```swift
-@LLMCodable
 @Generable
-struct SentimentAnalysis {
+struct SentimentAnalysis: LLMCodable {
     @Guide(description: "Overall sentiment", .enum(Sentiment.self))
     var sentiment: Sentiment
 
@@ -195,7 +196,7 @@ struct SentimentAnalysis {
     var keyPhrases: [String]
 }
 
-enum Sentiment: String, Codable {
+enum Sentiment: String, Codable, GenerableEnum {
     case positive, neutral, negative
 }
 ```
@@ -203,9 +204,8 @@ enum Sentiment: String, Codable {
 ### 要約生成
 
 ```swift
-@LLMCodable
 @Generable
-struct ArticleSummary {
+struct ArticleSummary: LLMCodable {
     @Guide(description: "One-line summary of the article")
     var headline: String
 
