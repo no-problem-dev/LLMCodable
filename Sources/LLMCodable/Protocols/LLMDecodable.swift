@@ -70,3 +70,49 @@ extension LLMDecodable {
         return response.content
     }
 }
+
+// MARK: - StringProtocol Extension
+
+extension StringProtocol {
+    /// Decodes this string into a structured type using a language model.
+    ///
+    /// ```swift
+    /// let person: Person = try await "Taro is 35 years old".decode()
+    /// // or
+    /// let person = try await "Taro is 35 years old".decode(as: Person.self)
+    /// ```
+    ///
+    /// - Parameter type: The type to decode into.
+    /// - Returns: A decoded instance.
+    public func decode<T: LLMDecodable>(as type: T.Type = T.self) async throws -> T {
+        try await T.decode(from: self)
+    }
+
+    /// Decodes this string into a structured type using a specified session.
+    ///
+    /// - Parameters:
+    ///   - type: The type to decode into.
+    ///   - session: The language model session to use.
+    /// - Returns: A decoded instance.
+    public func decode<T: LLMDecodable>(
+        as type: T.Type = T.self,
+        using session: LanguageModelSession
+    ) async throws -> T {
+        try await T.decode(from: self, using: session)
+    }
+
+    /// Decodes this string into a structured type with custom generation options.
+    ///
+    /// - Parameters:
+    ///   - type: The type to decode into.
+    ///   - session: The language model session to use.
+    ///   - options: Generation options.
+    /// - Returns: A decoded instance.
+    public func decode<T: LLMDecodable>(
+        as type: T.Type = T.self,
+        using session: LanguageModelSession,
+        options: GenerationOptions
+    ) async throws -> T {
+        try await T.decode(from: self, using: session, options: options)
+    }
+}
