@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19F852842EE4F05000F5C3FC /* LLMCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 19F852832EE4F05000F5C3FC /* LLMCodable */; };
+		19F852B02EE506CB00F5C3FC /* LLMCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 19F852AF2EE506CB00F5C3FC /* LLMCodable */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		19F852742EE4EF9200F5C3FC /* LLMCodableExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLMCodableExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		19F852942EE505BE00F5C3FC /* LLMCodableExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLMCodableExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		19F852762EE4EF9200F5C3FC /* LLMCodableExample */ = {
+		19F852962EE505BE00F5C3FC /* LLMCodableExample */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = LLMCodableExample;
 			sourceTree = "<group>";
@@ -23,29 +23,29 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		19F852712EE4EF9200F5C3FC /* Frameworks */ = {
+		19F852912EE505BE00F5C3FC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19F852842EE4F05000F5C3FC /* LLMCodable in Frameworks */,
+				19F852B02EE506CB00F5C3FC /* LLMCodable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		19F8526B2EE4EF9200F5C3FC = {
+		19F8528B2EE505BE00F5C3FC = {
 			isa = PBXGroup;
 			children = (
-				19F852762EE4EF9200F5C3FC /* LLMCodableExample */,
-				19F852752EE4EF9200F5C3FC /* Products */,
+				19F852962EE505BE00F5C3FC /* LLMCodableExample */,
+				19F852952EE505BE00F5C3FC /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		19F852752EE4EF9200F5C3FC /* Products */ = {
+		19F852952EE505BE00F5C3FC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				19F852742EE4EF9200F5C3FC /* LLMCodableExample.app */,
+				19F852942EE505BE00F5C3FC /* LLMCodableExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,68 +53,68 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		19F852732EE4EF9200F5C3FC /* LLMCodableExample */ = {
+		19F852932EE505BE00F5C3FC /* LLMCodableExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 19F8527F2EE4EF9400F5C3FC /* Build configuration list for PBXNativeTarget "LLMCodableExample" */;
+			buildConfigurationList = 19F8529F2EE505C000F5C3FC /* Build configuration list for PBXNativeTarget "LLMCodableExample" */;
 			buildPhases = (
-				19F852702EE4EF9200F5C3FC /* Sources */,
-				19F852712EE4EF9200F5C3FC /* Frameworks */,
-				19F852722EE4EF9200F5C3FC /* Resources */,
+				19F852902EE505BE00F5C3FC /* Sources */,
+				19F852912EE505BE00F5C3FC /* Frameworks */,
+				19F852922EE505BE00F5C3FC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				19F852762EE4EF9200F5C3FC /* LLMCodableExample */,
+				19F852962EE505BE00F5C3FC /* LLMCodableExample */,
 			);
 			name = LLMCodableExample;
 			packageProductDependencies = (
-				19F852832EE4F05000F5C3FC /* LLMCodable */,
+				19F852AF2EE506CB00F5C3FC /* LLMCodable */,
 			);
 			productName = LLMCodableExample;
-			productReference = 19F852742EE4EF9200F5C3FC /* LLMCodableExample.app */;
+			productReference = 19F852942EE505BE00F5C3FC /* LLMCodableExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		19F8526C2EE4EF9200F5C3FC /* Project object */ = {
+		19F8528C2EE505BE00F5C3FC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
-					19F852732EE4EF9200F5C3FC = {
+					19F852932EE505BE00F5C3FC = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
 				};
 			};
-			buildConfigurationList = 19F8526F2EE4EF9200F5C3FC /* Build configuration list for PBXProject "LLMCodableExample" */;
+			buildConfigurationList = 19F8528F2EE505BE00F5C3FC /* Build configuration list for PBXProject "LLMCodableExample" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 19F8526B2EE4EF9200F5C3FC;
+			mainGroup = 19F8528B2EE505BE00F5C3FC;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				19F852822EE4F05000F5C3FC /* XCLocalSwiftPackageReference "../../../LLMCodable" */,
+				19F852AE2EE506CB00F5C3FC /* XCLocalSwiftPackageReference "../../../LLMCodable" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 19F852752EE4EF9200F5C3FC /* Products */;
+			productRefGroup = 19F852952EE505BE00F5C3FC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				19F852732EE4EF9200F5C3FC /* LLMCodableExample */,
+				19F852932EE505BE00F5C3FC /* LLMCodableExample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		19F852722EE4EF9200F5C3FC /* Resources */ = {
+		19F852922EE505BE00F5C3FC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -124,7 +124,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		19F852702EE4EF9200F5C3FC /* Sources */ = {
+		19F852902EE505BE00F5C3FC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -134,7 +134,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		19F8527D2EE4EF9400F5C3FC /* Debug */ = {
+		19F8529D2EE505C000F5C3FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -197,7 +197,7 @@
 			};
 			name = Debug;
 		};
-		19F8527E2EE4EF9400F5C3FC /* Release */ = {
+		19F8529E2EE505C000F5C3FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -253,7 +253,7 @@
 			};
 			name = Release;
 		};
-		19F852802EE4EF9400F5C3FC /* Debug */ = {
+		19F852A02EE505C000F5C3FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -267,7 +267,6 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -277,15 +276,15 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		19F852812EE4EF9400F5C3FC /* Release */ = {
+		19F852A12EE505C000F5C3FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -299,7 +298,6 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,10 +307,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -320,20 +318,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		19F8526F2EE4EF9200F5C3FC /* Build configuration list for PBXProject "LLMCodableExample" */ = {
+		19F8528F2EE505BE00F5C3FC /* Build configuration list for PBXProject "LLMCodableExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				19F8527D2EE4EF9400F5C3FC /* Debug */,
-				19F8527E2EE4EF9400F5C3FC /* Release */,
+				19F8529D2EE505C000F5C3FC /* Debug */,
+				19F8529E2EE505C000F5C3FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		19F8527F2EE4EF9400F5C3FC /* Build configuration list for PBXNativeTarget "LLMCodableExample" */ = {
+		19F8529F2EE505C000F5C3FC /* Build configuration list for PBXNativeTarget "LLMCodableExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				19F852802EE4EF9400F5C3FC /* Debug */,
-				19F852812EE4EF9400F5C3FC /* Release */,
+				19F852A02EE505C000F5C3FC /* Debug */,
+				19F852A12EE505C000F5C3FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -341,18 +339,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		19F852822EE4F05000F5C3FC /* XCLocalSwiftPackageReference "../../../LLMCodable" */ = {
+		19F852AE2EE506CB00F5C3FC /* XCLocalSwiftPackageReference "../../../LLMCodable" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../../LLMCodable;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		19F852832EE4F05000F5C3FC /* LLMCodable */ = {
+		19F852AF2EE506CB00F5C3FC /* LLMCodable */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LLMCodable;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 19F8526C2EE4EF9200F5C3FC /* Project object */;
+	rootObject = 19F8528C2EE505BE00F5C3FC /* Project object */;
 }
