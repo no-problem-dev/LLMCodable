@@ -3,7 +3,7 @@ import LLMCodable
 
 struct SentimentExampleView: View {
     @State private var inputText = "This product is amazing! I absolutely love it. Best purchase ever!"
-    @State private var result: SentimentAnalysis?
+    @State private var result: DecodedResult<SentimentAnalysis>?
     @State private var isLoading = false
     @State private var errorMessage: String?
 
@@ -33,14 +33,14 @@ struct SentimentExampleView: View {
                             HStack {
                                 Text("Sentiment:")
                                     .fontWeight(.medium)
-                                SentimentBadge(sentiment: result.sentiment)
+                                SentimentBadge(sentiment: result.value.sentiment)
                             }
 
                             LabeledContent("Confidence") {
                                 Text("\(Int(result.confidence * 100))%")
                             }
 
-                            ArraySection(title: "Key Phrases", items: result.keyPhrases)
+                            ArraySection(title: "Key Phrases", items: result.value.keyPhrases)
                         }
                     }
                 }
@@ -59,7 +59,7 @@ struct SentimentExampleView: View {
         defer { isLoading = false }
 
         do {
-            result = try await SentimentAnalysis.decode(from: inputText)
+            result = try await inputText.decodeWithConfidence(as: SentimentAnalysis.self)
         } catch {
             errorMessage = error.localizedDescription
         }

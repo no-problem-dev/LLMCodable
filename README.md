@@ -40,6 +40,8 @@ let markdown = person.llmEncoded(using: .markdown)
 
 - **Codableライクなプロトコル** - `LLMDecodable`と`LLMEncodable`でSwiftらしいAPI設計
 - **Foundation Modelsとの統合** - Apple Intelligence（`@Generable`, `@Guide`）をシームレスに活用
+- **ストリーミング対応** - プロパティ単位・配列要素単位のリアルタイムデコード
+- **信頼度スコア** - 抽出精度の信頼度を0.0〜1.0で取得
 - **複数エンコード形式** - Markdown、JSON、自然言語、カスタム形式に対応
 - **非同期処理対応** - Swift Concurrencyによるasync/await API
 
@@ -102,7 +104,47 @@ let json = notes.llmEncoded(using: .json)
 let natural = notes.llmEncoded(using: .naturalLanguage)
 ```
 
-### 4. カスタムセッションの使用
+### 4. ストリーミングデコード
+
+プロパティが生成されるたびにUIを更新：
+
+```swift
+let stream = try MovieReview.decodeStream(from: reviewText)
+
+for try await partial in stream {
+    if let title = partial.title {
+        self.title = title  // タイトルが生成されたら即座に表示
+    }
+    if let rating = partial.rating {
+        self.rating = rating
+    }
+}
+```
+
+### 5. 配列要素のストリーミング
+
+配列の各要素が完成するたびに取得：
+
+```swift
+let stream = recipeText.decodeElements(of: Recipe.self)
+
+for try await recipe in stream {
+    recipes.append(recipe)  // 各レシピが完成次第追加
+}
+```
+
+### 6. 信頼度スコア付きデコード
+
+入力の曖昧さに基づく信頼度を取得：
+
+```swift
+let result = try await "多分30歳くらいの田中さん".decodeWithConfidence(as: Person.self)
+
+print(result.value.name)   // "田中"
+print(result.confidence)   // 0.7（曖昧な入力のため低め）
+```
+
+### 7. カスタムセッションの使用
 
 ```swift
 let session = LanguageModelSession()
@@ -119,17 +161,24 @@ let person = try await Person.decode(
 
 ### LLMDecodable
 
-曖昧なテキストから構造化データへの変換を定義するプロトコル。
+曖昧なテキストから構造化データへの変換を定義するプロトコル。`Generable`に準拠していれば、デフォルト実装が自動的に提供されます。
+
+| メソッド | 説明 |
+|---------|------|
+| `decode(from:)` | 基本的なデコード |
+| `decodeStream(from:)` | プロパティ単位のストリーミング |
+| `decodeElements(of:)` | 配列要素単位のストリーミング（StringProtocol拡張のみ） |
+| `decodeWithConfidence(from:)` | 信頼度スコア付きデコード |
+
+すべてのメソッドは`StringProtocol`の拡張としても利用可能：
 
 ```swift
-public protocol LLMDecodable: Generable {
-    static func decode<S: StringProtocol>(from input: S) async throws -> Self
-    static func decode<S: StringProtocol>(from input: S, using session: LanguageModelSession) async throws -> Self
-    static func decode<S: StringProtocol>(from input: S, using session: LanguageModelSession, options: GenerationOptions) async throws -> Self
-}
-```
+// Type-first API
+let person = try await Person.decode(from: text)
 
-`Generable`に準拠していれば、デフォルト実装が自動的に提供されます。
+// Input-first API
+let person = try await text.decode(as: Person.self)
+```
 
 ### LLMEncodable
 
@@ -185,20 +234,23 @@ let contact = try await ContactInfo.decode(from: text)
 
 ```swift
 @Generable
-struct SentimentAnalysis: LLMCodable {
-    @Guide(description: "Overall sentiment", .enum(Sentiment.self))
-    var sentiment: Sentiment
+enum Sentiment: String, Codable, CaseIterable {
+    case positive, neutral, negative
+}
 
-    @Guide(description: "Confidence score", .range(0.0...1.0))
-    var confidence: Double
+@Generable
+struct SentimentAnalysis: LLMCodable {
+    @Guide(description: "Overall sentiment")
+    var sentiment: Sentiment
 
     @Guide(description: "Key phrases that influenced the sentiment")
     var keyPhrases: [String]
 }
 
-enum Sentiment: String, Codable, GenerableEnum {
-    case positive, neutral, negative
-}
+// 信頼度スコア付きで分析
+let result = try await text.decodeWithConfidence(as: SentimentAnalysis.self)
+print(result.value.sentiment)  // .positive
+print(result.confidence)       // 0.95
 ```
 
 ### 要約生成

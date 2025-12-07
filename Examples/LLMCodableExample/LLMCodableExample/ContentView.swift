@@ -23,6 +23,9 @@ struct ContentView: View {
                     NavigationLink("Article Summary") {
                         ArticleSummaryExampleView()
                     }
+                    NavigationLink("Decode with Confidence") {
+                        ConfidenceExampleView()
+                    }
                 }
 
                 Section("Streaming Examples") {
