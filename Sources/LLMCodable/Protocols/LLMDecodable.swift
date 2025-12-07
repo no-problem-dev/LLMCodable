@@ -69,6 +69,59 @@ extension LLMDecodable {
         }
         return response.content
     }
+
+    // MARK: - Streaming API
+
+    /// Streams the decoding process, yielding partial results as properties are generated.
+    ///
+    /// ```swift
+    /// let stream = try Person.decodeStream(from: "Taro Tanaka, 35 years old")
+    /// for try await partial in stream {
+    ///     if let name = partial.name {
+    ///         print("Name: \(name)")
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter input: Unstructured text to parse.
+    /// - Returns: A response stream yielding partial results.
+    public static func decodeStream<S: StringProtocol>(
+        from input: S
+    ) throws -> LanguageModelSession.ResponseStream<Self> {
+        let session = LanguageModelSession()
+        return try decodeStream(from: input, using: session)
+    }
+
+    /// Streams the decoding process using a specified session.
+    /// - Parameters:
+    ///   - input: Unstructured text to parse.
+    ///   - session: The language model session to use.
+    /// - Returns: A response stream yielding partial results.
+    public static func decodeStream<S: StringProtocol>(
+        from input: S,
+        using session: LanguageModelSession
+    ) throws -> LanguageModelSession.ResponseStream<Self> {
+        try decodeStream(from: input, using: session, options: GenerationOptions())
+    }
+
+    /// Streams the decoding process with custom generation options.
+    /// - Parameters:
+    ///   - input: Unstructured text to parse.
+    ///   - session: The language model session to use.
+    ///   - options: Generation options.
+    /// - Returns: A response stream yielding partial results.
+    public static func decodeStream<S: StringProtocol>(
+        from input: S,
+        using session: LanguageModelSession,
+        options: GenerationOptions
+    ) throws -> LanguageModelSession.ResponseStream<Self> {
+        try session.streamResponse(
+            generating: Self.self,
+            options: options
+        ) {
+            Prompt("Extract structured data from the following text:\n\n\(input)")
+        }
+    }
 }
 
 // MARK: - StringProtocol Extension
@@ -114,5 +167,107 @@ extension StringProtocol {
         options: GenerationOptions
     ) async throws -> T {
         try await T.decode(from: self, using: session, options: options)
+    }
+
+    // MARK: - Streaming API
+
+    /// Streams the decoding process, yielding partial results as properties are generated.
+    ///
+    /// ```swift
+    /// let stream = try "Taro is 35 years old".decodeStream(as: Person.self)
+    /// for try await partial in stream {
+    ///     if let name = partial.name {
+    ///         print("Name: \(name)")
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameter type: The type to decode into.
+    /// - Returns: A response stream yielding partial results.
+    public func decodeStream<T: LLMDecodable>(
+        as type: T.Type = T.self
+    ) throws -> LanguageModelSession.ResponseStream<T> {
+        try T.decodeStream(from: self)
+    }
+
+    /// Streams the decoding process using a specified session.
+    ///
+    /// - Parameters:
+    ///   - type: The type to decode into.
+    ///   - session: The language model session to use.
+    /// - Returns: A response stream yielding partial results.
+    public func decodeStream<T: LLMDecodable>(
+        as type: T.Type = T.self,
+        using session: LanguageModelSession
+    ) throws -> LanguageModelSession.ResponseStream<T> {
+        try T.decodeStream(from: self, using: session)
+    }
+
+    /// Streams the decoding process with custom generation options.
+    ///
+    /// - Parameters:
+    ///   - type: The type to decode into.
+    ///   - session: The language model session to use.
+    ///   - options: Generation options.
+    /// - Returns: A response stream yielding partial results.
+    public func decodeStream<T: LLMDecodable>(
+        as type: T.Type = T.self,
+        using session: LanguageModelSession,
+        options: GenerationOptions
+    ) throws -> LanguageModelSession.ResponseStream<T> {
+        try T.decodeStream(from: self, using: session, options: options)
+    }
+
+    // MARK: - Element Streaming API
+
+    /// Streams individual elements from an array as they are generated.
+    ///
+    /// Unlike `decodeStream` which yields partial results with optional properties,
+    /// this method yields complete elements one by one as they become available.
+    ///
+    /// ```swift
+    /// let stream = "Alice, Bob, Charlie".decodeElements(of: Person.self)
+    /// for try await person in stream {
+    ///     print(person.name)  // Complete Person, not Optional
+    /// }
+    /// ```
+    ///
+    /// - Parameter elementType: The element type to decode.
+    /// - Returns: An async stream yielding complete elements.
+    public func decodeElements<T: LLMDecodable>(of elementType: T.Type) -> ElementStream<T> {
+        let session = LanguageModelSession()
+        return decodeElements(of: elementType, using: session)
+    }
+
+    /// Streams individual elements using a specified session.
+    ///
+    /// - Parameters:
+    ///   - elementType: The element type to decode.
+    ///   - session: The language model session to use.
+    /// - Returns: An async stream yielding complete elements.
+    public func decodeElements<T: LLMDecodable>(
+        of elementType: T.Type,
+        using session: LanguageModelSession
+    ) -> ElementStream<T> {
+        decodeElements(of: elementType, using: session, options: GenerationOptions())
+    }
+
+    /// Streams individual elements with custom generation options.
+    ///
+    /// - Parameters:
+    ///   - elementType: The element type to decode.
+    ///   - session: The language model session to use.
+    ///   - options: Generation options.
+    /// - Returns: An async stream yielding complete elements.
+    public func decodeElements<T: LLMDecodable>(
+        of elementType: T.Type,
+        using session: LanguageModelSession,
+        options: GenerationOptions
+    ) -> ElementStream<T> {
+        ElementStream(
+            session: session,
+            prompt: "Extract structured data as an array from the following text:\n\n\(self)",
+            options: options
+        )
     }
 }

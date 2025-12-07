@@ -25,6 +25,15 @@ struct ContentView: View {
                     }
                 }
 
+                Section("Streaming Examples") {
+                    NavigationLink("Movie Review (Streaming)") {
+                        StreamingExampleView()
+                    }
+                    NavigationLink("Recipe List (Element Stream)") {
+                        ElementStreamExampleView()
+                    }
+                }
+
                 Section("Encoding Examples") {
                     NavigationLink("Encoding Strategies") {
                         EncodingExampleView()
