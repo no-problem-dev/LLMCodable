@@ -9,7 +9,7 @@ A Swift package that enables LLM-based structured data transformation with intui
 ![Platforms](https://img.shields.io/badge/Platforms-iOS%2026+%20%7C%20macOS%2026+-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-📚 **[API Reference (DocC)](https://no-problem-dev.github.io/LLMCodable/documentation/llmcodable/)**
+📚 The API reference lives in the `///` comments under [`Sources/LLMCodable`](Sources/LLMCodable) (build it as DocC with Xcode's Build Documentation)
 
 ## Features
 
@@ -287,11 +287,11 @@ MIT License - See [LICENSE](LICENSE) for details
 
 ## For Developers
 
-- 🚀 **Release Process**: [Release Process](RELEASE_PROCESS.md) - Steps to release a new version
+- 🚀 **Release Process**: [Release Process](RELEASE_PROCESS.md) - write the version in CHANGELOG and push a tag
 
 ## Support
 
-- 📚 [API Reference (DocC)](https://no-problem-dev.github.io/LLMCodable/documentation/llmcodable/)
+- 📚 API Reference: the `///` comments under [`Sources/LLMCodable`](Sources/LLMCodable) (DocC)
 - 🐛 [Issue Tracker](https://github.com/no-problem-dev/LLMCodable/issues)
 - 💬 [Discussions](https://github.com/no-problem-dev/LLMCodable/discussions)
 
