@@ -9,7 +9,7 @@ Codableのような直感的なプロトコルでLLMベースの構造化デー�
 ![Platforms](https://img.shields.io/badge/Platforms-iOS%2026+%20%7C%20macOS%2026+-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-📚 **[APIリファレンス（DocC）](https://no-problem-dev.github.io/LLMCodable/documentation/llmcodable/)**
+📚 APIリファレンスは [`Sources/LLMCodable`](Sources/LLMCodable) の `///` コメントにある（Xcode の Build Documentation で DocC として読める）
 
 ## 特徴
 
@@ -287,11 +287,11 @@ MIT License - 詳細は [LICENSE](LICENSE) を参照
 
 ## 開発者向け情報
 
-- 🚀 **リリース作業**: [リリースプロセス](RELEASE_PROCESS.md) - 新バージョンをリリースする手順
+- 🚀 **リリース作業**: [リリースプロセス](RELEASE_PROCESS.md) - CHANGELOG に版を書いてタグを push する
 
 ## サポート
 
-- 📚 [APIリファレンス（DocC）](https://no-problem-dev.github.io/LLMCodable/documentation/llmcodable/)
+- 📚 APIリファレンス: [`Sources/LLMCodable`](Sources/LLMCodable) の `///` コメント（DocC）
 - 🐛 [Issue報告](https://github.com/no-problem-dev/LLMCodable/issues)
 - 💬 [ディスカッション](https://github.com/no-problem-dev/LLMCodable/discussions)
 
